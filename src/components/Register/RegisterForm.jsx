@@ -4,11 +4,13 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import Input from "../ui/Input/Input";
+import { useState } from "react";
 import { postRegisterFn } from "../../api/auth";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
   const { login } = useSession();
+  const [seePassword, setSeePassword] = useState(false);
 
   const {
     register,
@@ -41,6 +43,10 @@ const RegisterForm = () => {
     toast.loading();
     postRegister(data);
     reset();
+  };
+
+  const handleSeePassword = () => {
+    setSeePassword(!seePassword);
   };
 
   return (
@@ -128,16 +134,28 @@ const RegisterForm = () => {
               },
             }}
             register={register}
-            type={`password`}
+            type={seePassword ? `text` : `password`}
           />
+        </div>
+        <div className="w-auto">
+          <button
+            className="btn btn-secondary p-0 m-0"
+            onClick={handleSeePassword}
+          >
+            <img
+              alt=""
+              className="w-100 h-100 prueba p-3"
+              src="https://svgsilh.com/svg_v2/1915455.svg"
+            />
+          </button>
         </div>
       </div>
       <div className="mb-2 col-12 col-md-6 d-flex">
         <div className="w-100">
           <Input
-            errors={errors.password}
+            errors={errors.repeatPassword}
             label="Repetir contraseña"
-            name="password"
+            name="repeatPassword"
             options={{
               required: "El campo es requerido",
               maxLength: {
