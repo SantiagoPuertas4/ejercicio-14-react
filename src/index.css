@@ -8,3 +8,7 @@
 .prueba {
   height: 58px !important;
 }
+
+textarea {
+  min-height: 100px !important;
+}
