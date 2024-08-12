@@ -1,0 +1,6 @@
+#root {
+  background-color: #e8a7a7;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
