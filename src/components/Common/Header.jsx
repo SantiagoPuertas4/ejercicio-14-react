@@ -73,7 +73,7 @@ const Header = () => {
               </li>
             )}
             {isLoggedIn && (
-              <button onClick={handleLogout} className="btn btn-danger">
+              <button className="btn btn-danger" onClick={handleLogout}>
                 Cerrar Sesion
               </button>
             )}
