@@ -102,7 +102,7 @@ const AdminForm = () => {
         register={register}
       />
       <div className="text-end">
-        <button type="submit" className="btn btn-light">
+        <button className="btn btn-light" type="submit">
           Guardar
         </button>
       </div>
