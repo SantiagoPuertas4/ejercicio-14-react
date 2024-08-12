@@ -27,3 +27,30 @@ export const postLoginFn = async (data) => {
   //Aca ya sabemos que esta todo ok, loguear al usuario
   return { ...foundUser, password: undefined };
 };
+
+export const postRegisterFn = async (data) => {
+  const res = await fetch(`${BACKEND_URL}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      firstname: data.firstname,
+      lastname: data.lastname,
+      username: data.username,
+      password: data.password,
+      isAdmin: false,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Ocurrio un error al guardar el usuario");
+  }
+
+  return {
+    firstname: data.firstname,
+    lastname: data.lastname,
+    username: data.username,
+    isAdmin: false,
+  };
+};
