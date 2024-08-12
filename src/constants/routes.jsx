@@ -4,6 +4,7 @@ import PrivateView from "../views/routing/PrivateView";
 import LoginView from "../views/LoginView";
 import HomeView from "../views/HomeView";
 import AuthView from "../views/routing/AuthView";
+import RegisterView from "../views/RegisterView";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "register",
-            element: <p>Register</p>,
+            element: <RegisterView />,
           },
         ],
       },

@@ -24,7 +24,9 @@ const Input = (props) => {
       <label htmlFor={`${name}-input`}>{label}</label>
 
       <div className="invalid-feedback">
-        <span className="badge text-bg-danger">{errors?.message}</span>
+        <span className="badge text-bg-danger text-wrap">
+          {errors?.message}
+        </span>
       </div>
     </fieldset>
   );
