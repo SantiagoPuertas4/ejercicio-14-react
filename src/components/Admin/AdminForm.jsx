@@ -2,15 +2,25 @@ import { useForm } from "react-hook-form";
 import Input from "../ui/Input/Input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { postBlogFn } from "../../api/blogs";
+import { postBlogFn, putBlogFn } from "../../api/blogs";
+import { useBlog } from "../../stores/useBlog";
 
 const AdminForm = () => {
+  const { blogToEdit, clearBlogToEdit } = useBlog();
+
   const {
     register,
     reset,
     handleSubmit: onSubmitRHF,
     formState: { errors },
+    setValue,
   } = useForm();
+
+  if (blogToEdit) {
+    setValue("title", blogToEdit.title);
+    setValue("imageUrl", blogToEdit.imageUrl);
+    setValue("content", blogToEdit.content);
+  }
 
   const queryClient = useQueryClient();
 
@@ -33,10 +43,37 @@ const AdminForm = () => {
     },
   });
 
+  const { mutate: putBlog } = useMutation({
+    mutationFn: putBlogFn,
+    onSuccess: () => {
+      toast.dismiss();
+      toast.success("Entrada actualizada");
+
+      clearBlogToEdit();
+      reset();
+
+      //Avisarle a la tabla que se debe actualizar
+      queryClient.invalidateQueries({
+        queryKey: ["blogs"],
+      });
+    },
+    onError: (e) => {
+      toast.dismiss();
+      toast.error(e.message);
+    },
+  });
+
+  const handleCancelEdit = () => {
+    clearBlogToEdit();
+    reset();
+  };
+
   const handleSubmit = (data) => {
-    console.log(data);
     toast.loading("Guardando... Aguarde");
-    postBlog(data);
+
+    if (blogToEdit) {
+      putBlog({ blogId: blogToEdit.id, data });
+    } else postBlog(data);
   };
 
   return (
@@ -46,6 +83,13 @@ const AdminForm = () => {
     >
       <h1 className="text-light">Crear nueva entrada</h1>
       <hr />
+      {blogToEdit && (
+        <div className="alert alert-warning">
+          Atencion: estas modificando la entrada con titulo{" "}
+          <b>{blogToEdit.title}</b>
+        </div>
+      )}
+
       <Input
         className="mb-2"
         errors={errors.title}
@@ -102,6 +146,12 @@ const AdminForm = () => {
         register={register}
       />
       <div className="text-end">
+        {blogToEdit && (
+          <button className="btn" type="button" onClick={handleCancelEdit}>
+            Cancelar edicion
+          </button>
+        )}
+
         <button className="btn btn-light" type="submit">
           Guardar
         </button>

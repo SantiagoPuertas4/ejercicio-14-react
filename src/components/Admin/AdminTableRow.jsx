@@ -4,11 +4,12 @@ import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { deleteBlogFn } from "../../api/blogs";
+import { useBlog } from "../../stores/useBlog";
 
 const AdminTableRow = (props) => {
   const { blog, index } = props;
-
   const queryClient = useQueryClient();
+  const { setBlogToEdit } = useBlog();
 
   const { mutate: deleteBlog } = useMutation({
     mutationFn: deleteBlogFn,
@@ -29,6 +30,7 @@ const AdminTableRow = (props) => {
 
   const handleEdit = () => {
     console.log("Editar", blog.id);
+    setBlogToEdit(blog);
   };
 
   const handleDelete = async () => {

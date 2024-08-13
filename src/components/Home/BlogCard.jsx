@@ -24,5 +24,5 @@ BlogCard.propTypes = {
     imageUrl: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
   }),
-  index: PropTypes.number.isRequired,
+  index: PropTypes.number,
 };
