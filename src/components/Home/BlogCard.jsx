@@ -8,7 +8,7 @@ const BlogCard = (props) => {
       <div className="card-body">
         <h5 className="card-title">{blog.title}</h5>
         <div className="text-end">
-          <Link className="btn btn-dark" to={`/details/${blog.id}`}>
+          <Link className="btn btn-dark" to={`/detail/${blog.id}`}>
             <i className="bi bi-arrow-up-right me-2"></i>Ir
           </Link>
         </div>
