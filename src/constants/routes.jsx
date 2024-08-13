@@ -6,6 +6,8 @@ import HomeView from "../views/HomeView";
 import AuthView from "../views/routing/AuthView";
 import RegisterView from "../views/RegisterView";
 import AdminView from "../views/AdminView";
+import DetailView from "../views/DetailView";
+import Error404View from "../views/Error404View";
 
 export const router = createBrowserRouter([
   {
@@ -18,7 +20,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "detail/:id",
-        element: <p>Detalle</p>,
+        element: <DetailView />,
       },
       // Rutas de autenticacion, no deberian poder accederse estando logueados
       {
@@ -45,6 +47,10 @@ export const router = createBrowserRouter([
             element: <AdminView />,
           },
         ],
+      },
+      {
+        path: "*",
+        element: <Error404View />,
       },
     ],
   },
