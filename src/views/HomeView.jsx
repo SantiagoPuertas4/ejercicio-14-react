@@ -24,7 +24,7 @@ const HomeView = () => {
     );
   }
 
-  if (blogs && blogs.length === 0) {
+  if (blogs && blogs.data.length === 0) {
     return (
       <div className="alert alert-info">
         No se encontraron entradas de blog para mostrar
@@ -34,7 +34,7 @@ const HomeView = () => {
 
   return (
     <section className="row">
-      {blogs.map((blog) => {
+      {blogs.data.map((blog) => {
         return (
           <article className="col-12 col-md-4 col-lg-3" key={blog.id}>
             <BlogCard blog={blog} />

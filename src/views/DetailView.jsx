@@ -35,16 +35,16 @@ const DetailView = () => {
         <section className="row g-4">
           <article className="col-12 col-md-6">
             <img
-              alt={blog.title}
+              alt={blog.data.title}
               className="w-100 rounded"
-              src={blog.imageUrl}
+              src={blog.data.imageUrl}
             />
           </article>
           <article className="col-12 col-md-6">
-            <h1>{blog.title}</h1>
+            <h1>{blog.data.title}</h1>
           </article>
         </section>
-        <p className="mt-4">{blog.content}</p>
+        <p className="mt-4">{blog.data.content}</p>
       </section>
     </>
   );

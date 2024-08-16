@@ -27,7 +27,7 @@ const AdminTable = () => {
     );
   }
 
-  if (blogs && blogs.length === 0) {
+  if (blogs && blogs.data.length === 0) {
     return (
       <div className="alert alert-info mt-3">
         <p>No se encontraron blogs para listar</p>
@@ -47,7 +47,7 @@ const AdminTable = () => {
           </tr>
         </thead>
         <tbody>
-          {blogs.map((blog, index) => {
+          {blogs.data.map((blog, index) => {
             return <AdminTableRow blog={blog} index={index} key={blog.id} />;
           })}
         </tbody>
