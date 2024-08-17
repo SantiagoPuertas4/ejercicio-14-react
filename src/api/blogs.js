@@ -1,10 +1,12 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const postBlogFn = async (data) => {
+  const token = sessionStorage.getItem("token");
   const res = await fetch(`${BACKEND_URL}/blogs`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(data),
   });
@@ -37,8 +39,12 @@ export const getBlogFn = async (blogId) => {
 };
 
 export const deleteBlogFn = async (blogId) => {
+  const token = sessionStorage.getItem("token");
   const res = await fetch(`${BACKEND_URL}/blogs/${blogId}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   if (!res.ok) {
     throw new Error(
@@ -48,10 +54,13 @@ export const deleteBlogFn = async (blogId) => {
 };
 
 export const putBlogFn = async ({ blogId, data }) => {
+  console.log(blogId, data);
+  const token = sessionStorage.getItem("token");
   const res = await fetch(`${BACKEND_URL}/blogs/${blogId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(data),
   });
