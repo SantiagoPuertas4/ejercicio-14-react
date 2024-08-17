@@ -23,14 +23,16 @@ const RegisterForm = () => {
     mutationFn: postRegisterFn,
     onSuccess: (userData) => {
       toast.dismiss();
-      toast.success(`Registrado. Bienvenido ${userData.firstname}`);
+      toast.success(`Registrado. Bienvenido, ${userData.firstname}`);
+
+      reset();
 
       // Hacer el login en el cliente
       login(userData);
 
       setTimeout(() => {
         navigate("/");
-      }, 1500);
+      }, 2000);
     },
     onError: (e) => {
       toast.dismiss();

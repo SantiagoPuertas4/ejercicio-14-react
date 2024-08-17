@@ -43,7 +43,6 @@ export const postRegisterFn = async (data) => {
       lastname: data.lastname,
       username: data.username,
       password: data.password,
-      isAdmin: false,
     }),
   });
 
@@ -51,10 +50,10 @@ export const postRegisterFn = async (data) => {
     throw new Error("Ocurrio un error al guardar el usuario");
   }
 
-  return {
-    firstname: data.firstname,
-    lastname: data.lastname,
+  const userData = await postLoginFn({
     username: data.username,
-    isAdmin: false,
-  };
+    password: data.password,
+  });
+
+  return userData;
 };
